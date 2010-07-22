@@ -1,0 +1,122 @@
+<div class="guide">
+	<span class="action"><%= link_to 'back to my games', user_url(@user) %></span><br /><br />
+	<span class="action_title">Viewing game</span>
+	<%= @game.title %>
+<p>
+	<span class="action_title">Players</span>
+	<% @game.players.each do |p| %>
+		<%= p.login %> <% if p == @game.host %>
+											(host)
+									 <% elsif @host %>
+											<%= link_to 'remove', :action => :remove_player, :id => @game, :player_id => p.id %>
+									 <% end %><br />
+	<% end %>
+	<% if @host %>
+		<% form_tag :action => :add_player, :id => @game do %>
+			<%= select_tag 'new_player', options_from_collection_for_select(@available_players, :id, :login) %>
+			<%= submit_tag 'add player'%>
+		<% end %>
+	<% end %>
+</p>
+</div>
+
+<div class="object_box ">
+	<div class="view">
+		<% if @hand.empty? %>
+		<div class="card">
+			<span class="text">Your hand is empty.</span>
+		</div>
+		<% else %>	
+			<% @hand.each do |a| %>
+				<div class="card">
+					<%= link_to "play", :controller => :decks, 
+															:action => 'play', 
+															:id => @deck, :game_id => @game, :card_id => a.card %> :<%= render :partial => 'cards/card', :object => a.card %>
+				</div>
+			<% end %>		
+		<% end %>
+		<br />
+	</div>
+	<div class="guide">
+		<span class="action_title">Hand</span>
+	</div>
+</div>
+<div class="object_box ">
+	<div class="view">
+		<div class="card">
+			<span class="text">Cards remaining: <%= @available.length %></span> 
+			<% if @host %>
+				<%= link_to_remote "-> toggle full deck", :url => '#', :complete => visual_effect(:toggle_slide, 'cards-popdown')%>
+			<% end %>			
+		</div>
+		<% if @host %>
+			<div id="cards-popdown" style="display:none">
+				<% @available.each do |a| %>
+				<div class="card">
+					<%= a.position+1 %>: <%= render :partial => 'cards/card', :object => a.card %>
+				</div>
+				<% end %>
+			</div>
+		<% end %>
+		<br />
+	</div>
+	<div class="guide">
+		<span class="action_title">Deck</span>
+		<% if @player or @host %>
+			<span class="action">
+				<%= link_to 'draw', :controller => :decks, :action => :draw, :game_id => @game, :id => @deck %>
+			</span><br />
+			<span class="action">
+				<%= link_to 'draw into hand', :controller => :decks, :action => :draw, :game_id => @game, :id => @deck, :hand => 1 %>
+			</span><br />
+		<% end %>
+		<% if @host %>
+		<span class="action">
+			<%= link_to 'shuffle', game_deck_url(@game, @deck), :method => :put %>
+		</span>
+		<% end %>
+	</div>
+</div>
+<div class="object_box ">
+	<div class="view">
+		<div class="card">
+			<span class="text">Cards discarded: <%= @discarded.length %></span>
+			<%= link_to_remote "-> toggle discards", :url => '#', :complete => visual_effect(:toggle_slide, 'discards-popdown')%>
+		</div>
+		<div id="discards-popdown" style="display:none">
+			<% @discarded.each do |d| %>
+			<div class="card">
+				<%= render :partial => 'cards/card', :object => d.card %>
+			</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="guide">
+		<span class="action_title">Discards</span>
+	</div>
+</div>
+<div class="object_box ">
+	<div class="view">
+		<% @draws.each do |draw| %>
+		<div class="card">
+			<%= link_to "#{draw.id}:", game_draw_url(@game, draw) %> <%= render :partial => 'cards/card', :object => draw.card %>
+		</div>
+		<% end %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Draws</span>
+	</div>
+</div>
+<div class="object_box ">
+	<div class="view">
+		<% @plays.each do |play| %>
+		<div class="card">
+			<%= link_to "#{play.id}:", game_play_url(@game, play) %> <%= render :partial => 'cards/card', :object => play.card %>
+		</div>
+		<% end %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Plays</span>
+	</div>
+</div>
+<div class="object_box"></div>

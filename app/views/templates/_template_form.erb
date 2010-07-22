@@ -1,0 +1,20 @@
+<div class="object_box ">
+	<div class="view">
+		<% form_for(@tpl) do |f| %>
+			<%= f.error_messages %>
+			<%= f.text_field :name %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Name</span>
+	</div>
+</div>
+<div class="object_box ">
+	<div class="view">
+		<%= f.check_box :public %> - check if you want this template to be usable by all users. Please only do this for complete templates.<br />
+		<%= f.submit 'Create' %>
+		<% end %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Public?</span>
+	</div>
+</div>

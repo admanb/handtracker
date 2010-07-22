@@ -1,0 +1,19 @@
+<div class="guide">
+	<span class="action_title">Add card</span>
+	<%= link_to 'cancel', template_url(@tpl) %>
+</div>
+<br />
+<div class="object_box ">
+	<div class="view">
+		<% form_for([@tpl, @card]) do |f| %>
+			<%= f.error_messages %>
+			<%= f.text_field :text, :size => 80 %><br />
+			<%= f.submit 'Create' %>
+		<% end %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Text</span>
+	</div>
+</div>
+<div class="object_box"></div>
+

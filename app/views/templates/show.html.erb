@@ -1,0 +1,49 @@
+<div class="guide">
+	<span class="action"><%= link_to 'back to my games', user_url(@user) %></span><br /><br />
+	<span class="action_title">Viewing template</span>
+	<%= @tpl.name %><br /><br />
+</div>
+<div class="object_box ">
+	<div class="view">
+		<% if @tpl.public %>
+			This template is usable by everybody.
+		<% else %>
+			This template is only usable by <% if @owner %>you<% else %>the owner<% end %>.
+		<% end %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Public?</span>
+		<% if @owner %>
+			<% if @tpl.public %>
+				<%= link_to 'make un-public', :action => 'toggle_public', :id => @tpl, :public => 0 %>
+			<% else %>
+				<%= link_to 'make public', :action => 'toggle_public', :id => @tpl, :public => 1 %>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+<div class="object_box ">
+	<div class="view">
+		<% if @tpl.cards.empty? %>
+			This template has no cards yet!
+		<% else %>
+			<% @tpl.cards.each do |card| %>
+				<div class="card">
+					<%= render :partial => 'cards/card', :object => card %> 
+					<% if @owner %>
+						- <%= link_to 'delete', template_card_url(@tpl, card), :confirm => 'Are you sure?', :method => :delete %> | 
+						<%= link_to 'edit', edit_template_card_url(@tpl, card) %> | 
+						<%= link_to 'copy', :controller => 'cards', :action => 'copy', :template_id => @tpl, :id => card %>
+					<% end %>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Cards</span>
+		<% if @owner %>
+			<span class="action"><%= link_to 'add card', new_template_card_url(@tpl)%>
+		<% end %>
+	</div>
+</div>
+<div class="object_box "></div>

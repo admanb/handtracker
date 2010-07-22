@@ -1,0 +1,58 @@
+<div class="guide">
+	<span class="action_title">Welcome <%= @user.login %></span>
+	<%= link_to 'logout', :action => :logout, :id => @user %><br />
+</div>
+<br />
+<div class="object_box ">
+	<div class="view">
+		<% if @user.hosted.empty?() %>
+			You aren't hosting any games.
+		<% end %>
+		<% @user.hosted.each do |g| %>
+			<%= link_to g.title, game_url(g) %> - <%= link_to 'delete', game_url(g), :confirm => 'Are you sure?', :method => :delete %><br />
+		<% end %>
+		<br /><br />
+	</div>
+	<div class="guide">
+		<span class="action_title">Hosting</span>
+		<span class="action"><%= link_to 'new game', new_game_url %></span>
+	</div>
+</div>
+<div class="object_box ">
+	<div class="view">
+		<% if @user.games.empty?() %>
+			You aren't playing in any games.
+		<% end %>
+		<% @user.games.each do |g| %>
+			<%= link_to g.title, game_url(g) %><br />
+		<% end %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Playing</span>
+	</div>
+</div>
+<div class="object_box ">
+	<div class="view">
+		<% if @user.templates.empty?() %>
+			You haven't created any templates.
+		<% end %>
+		<% @user.templates.each do |t| %>
+			<%= link_to t.name, template_url(t) %><br />
+		<% end %><br /><br />
+	</div>
+	<div class="guide">
+		<span class="action_title">Your templates</span>
+		<span class="action"><%= link_to 'new template', new_template_url %></span>
+	</div>
+</div>
+<div class="object_box ">
+	<div class="view">
+		<% @tpls.each do |t| %>
+			<%= link_to t.name, template_url(t) %><br />
+		<% end %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Public templates</span>
+	</div>
+</div>
+<div class="object_box"></div>

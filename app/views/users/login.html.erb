@@ -1,0 +1,23 @@
+<%= flash[:error] %>
+<% form_for :user, :url => {:action => :authenticate} do |f| %>
+<div class="object_box ">
+	<div class="view">
+		<%= f.error_messages %>
+		<%= f.text_field :login %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Login</span>
+	</div>
+</div>
+
+<div class="object_box ">
+	<div class="view">
+		<%= f.password_field :password %><br />
+		<%= f.submit 'Login' %> or <%= link_to 'Register', new_user_url %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Password</span>
+	</div>
+</div>
+<div class="object_box"></div>
+<% end %>

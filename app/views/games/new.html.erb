@@ -1,0 +1,28 @@
+<div class="guide">
+	<span class="action_title">New game</span>
+	<%= link_to 'cancel', user_url(@user) %>
+</div>
+<br />
+<div class="object_box ">
+	<div class="view">
+		<% form_for(@game) do |f| %>
+			<%= f.error_messages %>
+			<%= f.text_field :title %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Title</span>
+	</div>
+</div>
+<div class="object_box ">
+	<div class="view">
+		<%= select_tag :template_id, options_from_collection_for_select(@templates, :id, :name)%><br />
+		<%= f.submit 'Create' %>
+		<% end %>
+	</div>
+	<div class="guide">
+		<span class="action_title">Deck</span>
+	</div>
+</div>
+<div class="object_box"></div>
+
+		

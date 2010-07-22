@@ -1,0 +1,22 @@
+<div class="guide">
+	<%= link_to 'back to the game', game_url(@game) %>
+	<p>
+	<span class="action_title">Viewing draw</span>
+	<%= @draw.id %>
+	</p>
+</div><br />
+<div class="object_box ">
+	<div class="view">
+		<%= render :partial => 'cards/card', :object => @draw.card %>
+		<br /><br /><br /><br /><br /><br /><br /><br />
+	</div>
+	<div class="guide">
+		<span class="action_title">User</span>
+		<%= @draw_owner.login %><br /><br />
+		<span class="action_title">Game</span>
+		<%= @game.title %><br /><br />
+		<span class="action_title">Time</span>
+		<%= @draw.created_at %><br /><br />
+	</div>
+</div>
+<div class="object_box ">
