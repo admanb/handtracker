@@ -9785,3 +9785,44 @@ Rendering users/show
   [4;35;1mGame Load (0.8ms)[0m   [0mSELECT * FROM "games" INNER JOIN "players_games" ON "games".id = "players_games".game_id WHERE ("players_games".user_id = 3 ) [0m
   [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT count(*) AS count_all FROM "templates" WHERE ("templates".user_id = 3) [0m
 Completed in 119ms (View: 59, DB: 4) | 200 OK [http://0.0.0.0/users/3]
+  [4;36;1mSQL (2.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (1.8ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100401222129)
+Migrating to CreateGames (20100401222204)
+Migrating to CreateDecks (20100401222209)
+Migrating to CreateCards (20100401222303)
+Migrating to CreateDraws (20100403005158)
+Migrating to RemakeGamePlayersTable (20100404000553)
+Migrating to EditDeckStructure (20100404212443)
+Migrating to FixDeckStructure (20100404213253)
+Migrating to AddTemplates (20100419230239)
+Migrating to UserTemplates (20100427234456)
+Migrating to DeckRedesign (20100429231839)
+Migrating to RedoHandTable (20100505000234)
+Migrating to AddPlays (20100722213429)
+Migrating to EditPlays (20100722215140)
+  [4;36;1mSQL (0.4ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (1.7ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (1.8ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (1.8ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("available_cards")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("card_in_hands")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("cards")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("decks")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("decks_cards")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("discarded_cards")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("draws")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("games")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("players_games")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("plays")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("templates")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("users")[0m
