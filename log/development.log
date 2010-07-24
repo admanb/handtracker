@@ -9826,3 +9826,458 @@ Migrating to EditPlays (20100722215140)
   [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("plays")[0m
   [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("templates")[0m
   [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("users")[0m
+
+
+Processing UsersController#login (for 127.0.0.1 at 2010-07-23 16:22:38) [GET]
+  [4;36;1mUser Load (0.8ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/login
+Completed in 291ms (View: 95, DB: 1) | 200 OK [http://0.0.0.0/]
+
+
+Processing UsersController#authenticate (for 127.0.0.1 at 2010-07-23 16:22:40) [POST]
+  Parameters: {"commit"=>"Login", "authenticity_token"=>"HqWrqJt5wyaVDxT/TPfi8Jy+MrxfyTsV+4yeAfdoyTw=", "user"=>{"password"=>"admanb", "login"=>"admanb"}}
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mUser Load (0.7ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = 'admanb' AND "users"."password" = 'admanb') LIMIT 1[0m
+Redirected to http://0.0.0.0:3000/users/1
+Completed in 50ms (DB: 1) | 302 Found [http://0.0.0.0/users/authenticate]
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-07-23 16:22:40) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTemplate Load (1.1ms)[0m   [0;1mSELECT * FROM "templates" WHERE (public = 't') [0m
+Rendering template within layouts/application
+Rendering users/show
+  [4;35;1mSQL (0.6ms)[0m   [0mSELECT count(*) AS count_all FROM "games" WHERE ("games".host_id = 1) [0m
+  [4;36;1mGame Load (1.0ms)[0m   [0;1mSELECT * FROM "games" WHERE ("games".host_id = 1) [0m
+  [4;35;1mGame Load (0.3ms)[0m   [0mSELECT * FROM "games" INNER JOIN "players_games" ON "games".id = "players_games".game_id WHERE ("players_games".user_id = 1 ) [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "templates" WHERE ("templates".user_id = 1) [0m
+Completed in 279ms (View: 196, DB: 4) | 200 OK [http://0.0.0.0/users/1]
+
+
+Processing GamesController#show (for 127.0.0.1 at 2010-07-23 16:22:52) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mGame Load (0.7ms)[0m   [0;1mSELECT * FROM "games" WHERE ("games"."id" = 1) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" INNER JOIN "players_games" ON "users".id = "players_games".user_id WHERE ("users"."id" = 1) AND ("players_games".game_id = 1 ) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "games" WHERE ("games"."id" = 1) [0m
+  [4;36;1mDeck Load (0.7ms)[0m   [0;1mSELECT * FROM "decks" WHERE ("decks".game_id = 1) LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT * FROM "users" INNER JOIN "players_games" ON "users".id = "players_games".user_id WHERE ("players_games".game_id = 1 ) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mUser Load (1.1ms)[0m   [0mSELECT * FROM "users" [0m
+  [4;36;1mDraw Load (5.0ms)[0m   [0;1mSELECT * FROM "draws" WHERE ("draws"."game_id" = 1) ORDER BY id DESC[0m
+  [4;35;1mPlay Load (3.4ms)[0m   [0mSELECT * FROM "plays" WHERE ("plays"."game_id" = 1) ORDER BY id DESC[0m
+  [4;36;1mCardInHand Load (0.9ms)[0m   [0;1mSELECT * FROM "card_in_hands" WHERE ("card_in_hands".user_id = 1) [0m
+  [4;35;1mDeck Load (0.6ms)[0m   [0mSELECT * FROM "decks" WHERE ("decks"."id" = 3) [0m
+  [4;36;1mGame Load (0.6ms)[0m   [0;1mSELECT * FROM "games" WHERE ("games"."id" = 3) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "decks" WHERE ("decks"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "games" WHERE ("games"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering games/show
+  [4;35;1mAvailableCard Load (4.9ms)[0m   [0mSELECT * FROM "available_cards" WHERE ("available_cards".deck_id = 1) ORDER BY position[0m
+  [4;36;1mCard Load (1.5ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 5) [0m
+Rendered cards/_card (7.6ms)
+  [4;35;1mCard Load (1.3ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 26) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 8) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 18) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 9) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 2) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 17) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 29) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 16) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 10) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 11) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 1) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 14) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 24) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 12) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 21) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 6) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 4) [0m
+Rendered cards/_card (0.4ms)
+  [4;36;1mCard Load (0.8ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 20) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mDiscardedCard Load (2.8ms)[0m   [0mSELECT * FROM "discarded_cards" WHERE ("discarded_cards".deck_id = 1) ORDER BY position[0m
+  [4;36;1mCard Load (0.8ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 25) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 25) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 30) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 27) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 23) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 13) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 3) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 28) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 7) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 19) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCard Load (0.7ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 15) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCard Load (0.7ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 22) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 28) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 19) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 7) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 27) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 13) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 18) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 20) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 30) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 25) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 3) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 2) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 1) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 28) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 3) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 13) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 23) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 27) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 30) [0m
+Rendered cards/_card (0.3ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards"."id" = 25) [0m
+Rendered cards/_card (0.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards"."id" = 25) [0m
+Rendered cards/_card (0.3ms)
+Completed in 799ms (View: 373, DB: 44) | 200 OK [http://0.0.0.0/games/1]
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-07-23 16:22:55) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTemplate Load (1.1ms)[0m   [0mSELECT * FROM "templates" WHERE (public = 't') [0m
+Rendering template within layouts/application
+Rendering users/show
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT count(*) AS count_all FROM "games" WHERE ("games".host_id = 1) [0m
+  [4;35;1mGame Load (1.1ms)[0m   [0mSELECT * FROM "games" WHERE ("games".host_id = 1) [0m
+  [4;36;1mGame Load (0.4ms)[0m   [0;1mSELECT * FROM "games" INNER JOIN "players_games" ON "games".id = "players_games".game_id WHERE ("players_games".user_id = 1 ) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT count(*) AS count_all FROM "templates" WHERE ("templates".user_id = 1) [0m
+Completed in 147ms (View: 88, DB: 4) | 200 OK [http://0.0.0.0/users/1]
+
+
+Processing TemplatesController#new (for 127.0.0.1 at 2010-07-23 16:22:58) [GET]
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering templates/new
+Rendered templates/_template_form (16.4ms)
+Completed in 107ms (View: 54, DB: 1) | 200 OK [http://0.0.0.0/templates/new]
+
+
+Processing TemplatesController#create (for 127.0.0.1 at 2010-07-23 16:23:05) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"HqWrqJt5wyaVDxT/TPfi8Jy+MrxfyTsV+4yeAfdoyTw=", "template"=>{"name"=>"Runewars Tactics", "public"=>"0"}}
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTemplate Create (1.0ms)[0m   [0;1mINSERT INTO "templates" ("name", "public", "user_id") VALUES('Runewars Tactics', 'f', 1)[0m
+Redirected to http://0.0.0.0:3000/templates/4
+Completed in 100ms (DB: 2) | 302 Found [http://0.0.0.0/templates]
+
+
+Processing TemplatesController#show (for 127.0.0.1 at 2010-07-23 16:23:05) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTemplate Load (0.6ms)[0m   [0;1mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+Rendering template within layouts/application
+Rendering templates/show
+  [4;35;1mSQL (0.6ms)[0m   [0mSELECT count(*) AS count_all FROM "cards" WHERE ("cards".template_id = 4) [0m
+Completed in 237ms (View: 178, DB: 2) | 200 OK [http://0.0.0.0/templates/4]
+
+
+Processing CardsController#new (for 127.0.0.1 at 2010-07-23 16:23:08) [GET]
+  Parameters: {"template_id"=>"4"}
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTemplate Load (0.6ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+Rendering template within layouts/application
+Rendering cards/new
+Completed in 139ms (View: 54, DB: 1) | 200 OK [http://0.0.0.0/templates/4/cards/new]
+
+
+Processing CardsController#new (for 127.0.0.1 at 2010-07-23 16:24:11) [GET]
+  Parameters: {"template_id"=>"4"}
+  [4;36;1mUser Load (0.7ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTemplate Load (0.6ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+Rendering template within layouts/application
+Rendering cards/new
+Completed in 116ms (View: 34, DB: 1) | 200 OK [http://0.0.0.0/templates/4/cards/new]
+
+
+Processing CardsController#new (for 127.0.0.1 at 2010-07-23 16:24:24) [GET]
+  Parameters: {"template_id"=>"4"}
+  [4;36;1mUser Load (0.8ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTemplate Load (0.6ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+Rendering template within layouts/application
+Rendering cards/new
+Completed in 120ms (View: 33, DB: 1) | 200 OK [http://0.0.0.0/templates/4/cards/new]
+
+
+Processing CardsController#create (for 127.0.0.1 at 2010-07-23 16:34:43) [POST]
+  Parameters: {"commit"=>"Create", "template_id"=>"4", "authenticity_token"=>"HqWrqJt5wyaVDxT/TPfi8Jy+MrxfyTsV+4yeAfdoyTw=", "card"=>{"text"=>"bang! ; barrel ; revolver"}}
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTemplate Load (0.7ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+
+NoMethodError (private method `split' called for {"text"=>"bang! ; barrel ; revolver"}:HashWithIndifferentAccess):
+  app/controllers/cards_controller.rb:13:in `create'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (80.5ms)
+Rendered rescues/_request_and_response (17.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing CardsController#new (for 127.0.0.1 at 2010-07-23 16:35:45) [GET]
+  Parameters: {"template_id"=>"4"}
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTemplate Load (0.6ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+Rendering template within layouts/application
+Rendering cards/new
+Completed in 188ms (View: 23, DB: 1) | 200 OK [http://0.0.0.0/templates/4/cards/new]
+
+
+Processing CardsController#create (for 127.0.0.1 at 2010-07-23 16:35:47) [POST]
+  Parameters: {"commit"=>"Create", "template_id"=>"4", "authenticity_token"=>"HqWrqJt5wyaVDxT/TPfi8Jy+MrxfyTsV+4yeAfdoyTw=", "card"=>{"text"=>"bang! ; barrel ; revolver"}}
+  [4;36;1mUser Load (0.7ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTemplate Load (0.6ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;36;1mCard Create (0.6ms)[0m   [0;1mINSERT INTO "cards" ("created_at", "template_id", "updated_at", "text", "deck_id") VALUES('2010-07-23 23:35:47', 4, '2010-07-23 23:35:47', 'bang!', NULL)[0m
+  [4;35;1mCard Create (0.4ms)[0m   [0mINSERT INTO "cards" ("created_at", "template_id", "updated_at", "text", "deck_id") VALUES('2010-07-23 23:35:47', 4, '2010-07-23 23:35:47', 'barrel', NULL)[0m
+  [4;36;1mCard Create (0.5ms)[0m   [0;1mINSERT INTO "cards" ("created_at", "template_id", "updated_at", "text", "deck_id") VALUES('2010-07-23 23:35:47', 4, '2010-07-23 23:35:47', 'revolver', NULL)[0m
+
+ActionView::MissingTemplate (Missing template cards/create.erb in view path app/views):
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing CardsController#new (for 127.0.0.1 at 2010-07-23 16:36:01) [GET]
+  Parameters: {"template_id"=>"4"}
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTemplate Load (0.6ms)[0m   [0;1mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+Rendering template within layouts/application
+Rendering cards/new
+Completed in 105ms (View: 22, DB: 1) | 200 OK [http://0.0.0.0/templates/4/cards/new]
+
+
+Processing CardsController#create (for 127.0.0.1 at 2010-07-23 16:36:02) [POST]
+  Parameters: {"commit"=>"Create", "template_id"=>"4", "authenticity_token"=>"HqWrqJt5wyaVDxT/TPfi8Jy+MrxfyTsV+4yeAfdoyTw=", "card"=>{"text"=>"bang! ; barrel ; revolver"}}
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTemplate Load (0.6ms)[0m   [0;1mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;35;1mCard Create (0.6ms)[0m   [0mINSERT INTO "cards" ("created_at", "template_id", "updated_at", "text", "deck_id") VALUES('2010-07-23 23:36:03', 4, '2010-07-23 23:36:03', 'bang!', NULL)[0m
+  [4;36;1mCard Create (0.5ms)[0m   [0;1mINSERT INTO "cards" ("created_at", "template_id", "updated_at", "text", "deck_id") VALUES('2010-07-23 23:36:03', 4, '2010-07-23 23:36:03', 'barrel', NULL)[0m
+  [4;35;1mCard Create (0.5ms)[0m   [0mINSERT INTO "cards" ("created_at", "template_id", "updated_at", "text", "deck_id") VALUES('2010-07-23 23:36:03', 4, '2010-07-23 23:36:03', 'revolver', NULL)[0m
+Redirected to http://0.0.0.0:3000/templates/4
+Completed in 119ms (DB: 3) | 302 Found [http://0.0.0.0/templates/4/cards]
+
+
+Processing TemplatesController#show (for 127.0.0.1 at 2010-07-23 16:36:03) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTemplate Load (0.6ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+Rendering template within layouts/application
+Rendering templates/show
+  [4;36;1mSQL (7.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "cards" WHERE ("cards".template_id = 4) [0m
+  [4;35;1mCard Load (2.1ms)[0m   [0mSELECT * FROM "cards" WHERE ("cards".template_id = 4) [0m
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Completed in 309ms (View: 157, DB: 11) | 200 OK [http://0.0.0.0/templates/4]
+
+
+Processing CardsController#new (for 127.0.0.1 at 2010-07-23 16:36:09) [GET]
+  Parameters: {"template_id"=>"4"}
+  [4;36;1mUser Load (0.7ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTemplate Load (0.7ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+Rendering template within layouts/application
+Rendering cards/new
+Completed in 110ms (View: 24, DB: 1) | 200 OK [http://0.0.0.0/templates/4/cards/new]
+
+
+Processing CardsController#create (for 127.0.0.1 at 2010-07-23 16:36:18) [POST]
+  Parameters: {"commit"=>"Create", "template_id"=>"4", "authenticity_token"=>"HqWrqJt5wyaVDxT/TPfi8Jy+MrxfyTsV+4yeAfdoyTw=", "card"=>{"text"=>"bang! ; barrel  ; ; ; revolver"}}
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTemplate Load (0.6ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;36;1mCard Create (0.6ms)[0m   [0;1mINSERT INTO "cards" ("created_at", "template_id", "updated_at", "text", "deck_id") VALUES('2010-07-23 23:36:18', 4, '2010-07-23 23:36:18', 'bang!', NULL)[0m
+  [4;35;1mCard Create (0.4ms)[0m   [0mINSERT INTO "cards" ("created_at", "template_id", "updated_at", "text", "deck_id") VALUES('2010-07-23 23:36:18', 4, '2010-07-23 23:36:18', 'barrel', NULL)[0m
+  [4;36;1mCard Create (0.5ms)[0m   [0;1mINSERT INTO "cards" ("created_at", "template_id", "updated_at", "text", "deck_id") VALUES('2010-07-23 23:36:18', 4, '2010-07-23 23:36:18', 'revolver', NULL)[0m
+Redirected to http://0.0.0.0:3000/templates/4
+Completed in 119ms (DB: 3) | 302 Found [http://0.0.0.0/templates/4/cards]
+
+
+Processing TemplatesController#show (for 127.0.0.1 at 2010-07-23 16:36:18) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTemplate Load (0.6ms)[0m   [0;1mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "templates" WHERE ("templates"."id" = 4) [0m
+Rendering template within layouts/application
+Rendering templates/show
+  [4;35;1mSQL (0.7ms)[0m   [0mSELECT count(*) AS count_all FROM "cards" WHERE ("cards".template_id = 4) [0m
+  [4;36;1mCard Load (3.2ms)[0m   [0;1mSELECT * FROM "cards" WHERE ("cards".template_id = 4) [0m
+Rendered cards/_card (0.4ms)
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Rendered cards/_card (0.3ms)
+Completed in 365ms (View: 303, DB: 5) | 200 OK [http://0.0.0.0/templates/4]
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-07-23 16:38:19) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTemplate Load (1.1ms)[0m   [0;1mSELECT * FROM "templates" WHERE (public = 't') [0m
+Rendering template within layouts/application
+Rendering users/show
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "games" WHERE ("games".host_id = 1) [0m
+  [4;36;1mGame Load (0.9ms)[0m   [0;1mSELECT * FROM "games" WHERE ("games".host_id = 1) [0m
+  [4;35;1mGame Load (0.3ms)[0m   [0mSELECT * FROM "games" INNER JOIN "players_games" ON "games".id = "players_games".game_id WHERE ("players_games".user_id = 1 ) [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "templates" WHERE ("templates".user_id = 1) [0m
+  [4;35;1mTemplate Load (0.6ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates".user_id = 1) [0m
+Completed in 145ms (View: 86, DB: 4) | 200 OK [http://0.0.0.0/users/1]
+
+
+Processing TemplatesController#new (for 127.0.0.1 at 2010-07-23 16:38:22) [GET]
+  [4;36;1mUser Load (0.7ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering templates/new
+Rendered templates/_template_form (11.7ms)
+Completed in 79ms (View: 23, DB: 1) | 200 OK [http://0.0.0.0/templates/new]
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-07-23 16:39:02) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTemplate Load (1.2ms)[0m   [0;1mSELECT * FROM "templates" WHERE (public = 't') [0m
+Rendering template within layouts/application
+Rendering users/show
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT count(*) AS count_all FROM "games" WHERE ("games".host_id = 1) [0m
+  [4;36;1mGame Load (1.0ms)[0m   [0;1mSELECT * FROM "games" WHERE ("games".host_id = 1) [0m
+  [4;35;1mGame Load (0.3ms)[0m   [0mSELECT * FROM "games" INNER JOIN "players_games" ON "games".id = "players_games".game_id WHERE ("players_games".user_id = 1 ) [0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT count(*) AS count_all FROM "templates" WHERE ("templates".user_id = 1) [0m
+  [4;35;1mTemplate Load (0.6ms)[0m   [0mSELECT * FROM "templates" WHERE ("templates".user_id = 1) [0m
+Completed in 240ms (View: 180, DB: 5) | 200 OK [http://0.0.0.0/users/1]
+
+
+Processing GamesController#show (for 127.0.0.1 at 2010-07-23 21:08:57) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mGame Load (49.9ms)[0m   [0;1mSELECT * FROM "games" WHERE ("games"."id" = 1) [0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" INNER JOIN "players_games" ON "users".id = "players_games".user_id WHERE ("users"."id" IS NULL) AND ("players_games".game_id = 1 ) LIMIT 1[0m
+  [4;36;1mUser Load (8.1ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "games" WHERE ("games"."id" = 1) [0m
+  [4;36;1mDeck Load (1.2ms)[0m   [0;1mSELECT * FROM "decks" WHERE ("decks".game_id = 1) LIMIT 1[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT * FROM "users" INNER JOIN "players_games" ON "users".id = "players_games".user_id WHERE ("players_games".game_id = 1 ) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mUser Load (1.4ms)[0m   [0mSELECT * FROM "users" [0m
+  [4;36;1mDraw Load (7.8ms)[0m   [0;1mSELECT * FROM "draws" WHERE ("draws"."user_id" IS NULL AND "draws"."game_id" = 1) ORDER BY id DESC[0m
+  [4;35;1mPlay Load (12.5ms)[0m   [0mSELECT * FROM "plays" WHERE ("plays"."game_id" = 1) ORDER BY id DESC[0m
+
+NoMethodError (You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.card_in_hands):
+  app/controllers/games_controller.rb:32:in `show'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (131.3ms)
+Rendered rescues/_request_and_response (48.7ms)
+Rendering rescues/layout (internal_server_error)

@@ -10,14 +10,15 @@ class CardsController < ApplicationController
   
   def create
     @tpl = Template.find(params[:template_id])
-    @card = Card.new(params[:card])
-    @card.template = @tpl
-    if @card.save
-      flash[:notice] = 'Card added.'
-      redirect_to template_url(@tpl)
-    else
-      render :action => 'new'
+    cards = params[:card][:text].split(';') # separate by semi-colons
+    cards.each {|c| c.strip!} #strip leading and trailing whitespace
+    cards.delete("") # delete if it's blank
+    cards.each do |c|
+      new_card = Card.new(:text => c)
+      new_card.template = @tpl
+      new_card.save
     end
+    redirect_to template_url(@tpl)
   end
   
   def destroy

@@ -5,9 +5,11 @@
 <br />
 <div class="object_box ">
 	<div class="view">
+		enter the text of the cards, separated by semi-colons. Like so: <br />
+		bang! ; barrel ; revolver
 		<% form_for([@tpl, @card]) do |f| %>
 			<%= f.error_messages %>
-			<%= f.text_field :text, :size => 80 %><br />
+			<%= f.text_area :text %><br />
 			<%= f.submit 'Create' %>
 		<% end %>
 	</div>
