@@ -141,8 +141,16 @@ class GamesController < ApplicationController
   # DELETE /games/1.xml
   def destroy
     @game = Game.find(params[:id])
+    players = @game.players << @game.host
+    players.each do |p|
+      hand = p.card_in_hands.find_all {|card| card.deck.game == @game}
+      hand.each do |a|
+        p.cards.delete(a.card)
+      end
+      @user.save
+    end
     @game.destroy
-
+      
     respond_to do |format|
       format.html { redirect_to(user_url(@user)) }
       format.xml  { head :ok }
