@@ -57,5 +57,24 @@ class DecksController < ApplicationController
     redirect_to game_act_url(@game, @act)
   end
   
+  #GET
+  def give
+    @deck = Deck.find(params[:id])
+    @game = Game.find(params[:game_id])
+    @card = CardState.find(params[:card_id])
+    @players = @game.all_players
+  end
+  
+  #POST
+  def give_card
+    @deck = Deck.find(params[:id])
+    @game = Game.find(params[:game_id])
+    card = CardState.find(params[:card_id])
+    recipient = User.find(params[:recipient_id])
+    @act = Act.new(:card_state => card, :game => @game, :user => @user, :act_type => 'give_to_player', :position => @game.next_act_position)
+    @act.save()
+    card.move_to_hand(recipient)
+    redirect_to game_act_url(@game, @act)
+  end
 
 end

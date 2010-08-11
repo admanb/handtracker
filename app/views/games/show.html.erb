@@ -13,7 +13,7 @@
 	<% end %>
 	<% if @host %>
 		<% form_tag :action => :add_player, :id => @game do %>
-			<%= select_tag 'new_player', options_from_collection_for_select(@available_players, :id, :login) %>
+			<%= select_tag 'new_player_id', options_from_collection_for_select(@available_players, :id, :login) %>
 			<%= submit_tag 'add player'%>
 		<% end %>
 	<% end %>
@@ -31,7 +31,10 @@
 				<div class="card">
 					<%= link_to "play", :controller => :decks, 
 															:action => 'play', 
-															:id => @deck, :game_id => @game, :card_id => a %> :<%= render :partial => 'cards/card', :object => a.card %>
+															:id => @deck, :game_id => @game, :card_id => a %>, 
+					<%= link_to "give", :controller => :decks,
+															:action => 'give',
+															:id => @deck, :game_id => @game, :card_id => a %>: <%= render :partial => 'cards/card', :object => a.card %>
 				</div>
 			<% end %>		
 		<% end %>
@@ -99,7 +102,7 @@
 	<div class="view">
 		<% @acts.each do |act| %>
 		<div class="card">
-			<%= link_to "#{act.id}:", game_act_url(@game, act) %> <%= render :partial => 'cards/card', :object => act.card_state.card %>
+			<%= link_to "#{act.id}:", game_act_url(@game, act) %> <%= render :partial => 'acts/act', :object => act %>
 		</div>
 		<% end %>
 	</div>

@@ -7,13 +7,7 @@
 </div><br />
 <div class="object_box ">
 	<div class="view">
-		<b><%= @act_owner.login %></b> <% if @act.act_type == 'draw_to_hand'%>
-		drew this card into his hand:
-		<% elsif @act.act_type == 'play_from_hand'%>
-		played this card from his hand:
-		<% elsif @act.act_type == 'play_from_deck'%>
-		played this card from the deck:
-		<% end %><br />
+		<b><%= @act_owner.login %></b> <%= act_to_english(@act.act_type) %>: <br />
 		<div class="card">
 			<%= render :partial => 'cards/card', :object => @act.card_state.card %>
 		</div>

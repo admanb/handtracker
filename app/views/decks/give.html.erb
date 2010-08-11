@@ -1,0 +1,23 @@
+<div class="guide">
+	<%= link_to 'cancel', game_url(@game) %>
+	<p>
+	<span class="action_title">Give card</span>
+	</p>
+</div><br />
+<div class="object_box ">
+	<div class="view">
+		Pick a recipient for this card:
+		<div class="card">
+			<%= render :partial => 'cards/card', :object => @card.card %>
+		</div>
+		<br /><br /><br /><br /><br /><br /><br /><br />
+	</div>
+	<div class="guide">
+		<span class="action_title">Recipient</span>
+		<% form_tag :action => :give_card, :id => @deck, :game_id => @game, :card_id => @card do %>
+			<%= select_tag 'recipient_id', options_from_collection_for_select(@players, :id, :login) %>
+			<%= submit_tag 'give card'%>
+		<% end %>
+	</div>
+</div>
+<div class="object_box ">

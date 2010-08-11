@@ -36,7 +36,7 @@ class GamesController < ApplicationController
   end
 
   def add_player
-    @player = User.find(params[:new_player])
+    @player = User.find(params[:new_player_id])
     @game = Game.find(params[:id])
     @game.players << @player
     if @game.save
