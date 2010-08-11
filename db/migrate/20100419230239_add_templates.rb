@@ -7,7 +7,6 @@ class AddTemplates < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :cards
     drop_table :templates
   end
 end

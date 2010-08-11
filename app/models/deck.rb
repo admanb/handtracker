@@ -1,11 +1,7 @@
 class Deck < ActiveRecord::Base
   belongs_to :game
-  has_many :available_cards, :order => :position
-  has_many :discarded_cards, :order => :position
-  has_many :card_in_hands
-  has_many :availables, :through => :available_cards, :source => :card, :order => :position
-  has_many :discards, :through => :discarded_cards, :source => :card, :order => :position
-  has_many :in_hands, :through => :card_in_hands, :source => :card
+  
+  has_many :card_states, :order => :position, :dependent => :destroy
   
   @runewars_cards =  ["Dragon -	Triangle: nothing,	Rectangle: 2 Rout,	Circle: Orb,	Hexagon: 2 Dmg",
                       "Dragon -	Triangle: nothing,	Rectangle: 2 Rout,	Circle: Orb,	Hexagon: 1 Dmg",
@@ -37,14 +33,66 @@ class Deck < ActiveRecord::Base
                       "Dragon -	Triangle: 1 Dmg,	Rectangle: 1 Dmg,	Circle: nothing,	Hexagon: 2 Rout",
                       "Dragon -	Triangle: Orb,	Rectangle: 1 Dmg,	Circle: nothing,	Hexagon: 2 Rout",
                       "Dragon -	Triangle: Orb,	Rectangle: 1 Dmg,	Circle: nothing,	Hexagon: 2 Rout"]
-                      
+      
+  def next_draw_position
+    max = get_draw.max {|a,b| a.position <=> b.position}
+    if max
+      return max.position + 1
+    else
+      return 0
+    end
+  end
+  
+  def next_discard_position
+    max = get_discard.max {|a,b| a.position <=> b.position}
+    if max
+      return max.position + 1
+    else
+      return 0
+    end
+  end
+  
+  def get_draw
+    return card_states.find_all {|s| s.status == 'draw'}
+  end
+  
+  def get_discard
+    return card_states.find_all {|s| s.status == 'discard'}
+  end
+        
+  def first_card
+    return get_draw[0]
+  end     
+  
+  def empty_draw?
+    return get_draw == [] ? true : false
+  end
+  
+  def shuffle
+    cards = get_draw + get_discard
+    cards.each do |card|
+      if(card.status == 'discard')
+        card.move_to_draw()
+      end
+    end
+    1000.times do 
+      card_a = rand(cards.length)
+      card_b = rand(cards.length)
+      pos_a = cards[card_a].position
+      pos_b = cards[card_b].position
+      cards[card_a].position = pos_b
+      cards[card_b].position = pos_a
+    end
+    cards.each {|card| card.save()}
+  end
+              
   def self.new_from_template(template_id)
     deck = Deck.new()
     pos = 0
     template = Template.find(template_id)
     template.cards.each do |c|
-      card = AvailableCard.new(:card => c, :deck => deck, :position => pos)
-      deck.available_cards << card
+      card_state = CardState.new(:card => c, :deck => deck, :position => pos)
+      deck.card_states << card_state
       pos = pos+1
     end
     return deck

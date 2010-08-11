@@ -9,51 +9,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100722215140) do
+ActiveRecord::Schema.define(:version => 20100811195331) do
 
-  create_table "available_cards", :force => true do |t|
-    t.integer "deck_id"
-    t.integer "card_id"
-    t.integer "position"
+  create_table "acts", :force => true do |t|
+    t.integer  "game_id",       :null => false
+    t.integer  "user_id"
+    t.integer  "card_state_id", :null => false
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "act_type",      :null => false
   end
 
-  create_table "card_in_hands", :force => true do |t|
-    t.integer "deck_id"
-    t.integer "card_id"
+  create_table "card_states", :force => true do |t|
+    t.integer "deck_id",                      :null => false
     t.integer "user_id"
+    t.integer "card_id",                      :null => false
+    t.integer "position"
+    t.string  "status",   :default => "draw", :null => false
   end
 
   create_table "cards", :force => true do |t|
-    t.integer  "deck_id"
-    t.string   "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "template_id"
+    t.integer "deck_id"
+    t.text    "text"
+    t.integer "template_id"
   end
 
   create_table "decks", :force => true do |t|
-    t.integer  "game_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "decks_cards", :force => true do |t|
-    t.integer "deck_id"
-    t.integer "card_id"
-  end
-
-  create_table "discarded_cards", :force => true do |t|
-    t.integer "deck_id"
-    t.integer "card_id"
-    t.integer "position"
-  end
-
-  create_table "draws", :force => true do |t|
-    t.integer  "game_id"
-    t.integer  "user_id"
-    t.integer  "card_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "game_id"
   end
 
   create_table "games", :force => true do |t|
@@ -68,18 +51,10 @@ ActiveRecord::Schema.define(:version => 20100722215140) do
     t.integer "game_id"
   end
 
-  create_table "plays", :force => true do |t|
-    t.integer  "game_id"
-    t.integer  "user_id"
-    t.integer  "card_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "templates", :force => true do |t|
     t.string  "name"
     t.integer "user_id"
-    t.boolean "public",  :default => false
+    t.boolean "public",  :default => true
   end
 
   create_table "users", :force => true do |t|

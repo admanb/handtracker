@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|  
-  map.resources :games, :has_many => [:decks, :draws, :plays]
+  map.resources :games, :has_many => [:decks, :acts]
 
   map.resources :users
   

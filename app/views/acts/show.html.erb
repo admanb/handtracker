@@ -1,0 +1,29 @@
+<div class="guide">
+	<%= link_to 'back to the game', game_url(@game) %>
+	<p>
+	<span class="action_title">Viewing act</span>
+	<%= @act.id %>
+	</p>
+</div><br />
+<div class="object_box ">
+	<div class="view">
+		<b><%= @act_owner.login %></b> <% if @act.act_type == 'draw_to_hand'%>
+		drew this card into his hand:
+		<% elsif @act.act_type == 'play_from_hand'%>
+		played this card from his hand:
+		<% elsif @act.act_type == 'play_from_deck'%>
+		played this card from the deck:
+		<% end %><br />
+		<div class="card">
+			<%= render :partial => 'cards/card', :object => @act.card_state.card %>
+		</div>
+		<br /><br /><br /><br /><br /><br /><br /><br />
+	</div>
+	<div class="guide">
+		<span class="action_title">Game</span>
+		<%= @game.title %><br /><br />
+		<span class="action_title">Time</span>
+		<%= @act.created_at %><br /><br />
+	</div>
+</div>
+<div class="object_box ">

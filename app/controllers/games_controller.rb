@@ -18,24 +18,17 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @deck = @game.deck
-    @current_players = @game.players.to_a
-    @current_players << @game.host
+    @current_players = @game.all_players
     @available_players = User.find(:all) - @current_players
-    @discarded = @deck.discarded_cards
-    @available = @deck.available_cards
+    @discarded = @deck.get_discard
+    @draw_pile = @deck.get_draw
     if(@host)
-      @draws = Draw.find_all_by_game_id(@game, :order => 'id DESC')
+      @acts = @game.all_acts
     else
-      @draws = Draw.find_all_by_game_id_and_user_id(@game, @user, :order => 'id DESC')
+      @acts = @game.visible_acts(@user)
     end
-    @plays = Play.find_all_by_game_id(@game, :order => 'id DESC')
-    @hand = @user.card_in_hands.find_all {|card| card.deck.game == @game}
-    if @draws == nil
-      @draws = []
-    end
-    if @hand == nil
-      @hand = []
-    end
+    @hand = @user.get_hand(@game)
+    @hand = @hand ? @hand : []
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @game }
@@ -57,20 +50,11 @@ class GamesController < ApplicationController
 
   def remove_player
     @player = User.find(params[:player_id])
-    
-    # This is a bit ass
     @game = Game.find(params[:id])
-    @deck = @game.deck
-    players_hand = @player.card_in_hands.find_all {|card| card.deck.game == @game}
+    players_hand = @player.get_hand(@game)
     players_hand.each do |a|
-      @player.cards.delete(a.card)
-      discard = DiscardedCard.new(:deck => @deck, :card => a.card, :position => DiscardedCard.find_new_position(@deck))
-      @deck.discarded_cards << discard
-      @user.save
-      @deck.save
-    end
-    
-    @game = Game.find(params[:id])
+      a.move_to_discard()
+    end   
     @game.players.delete(@player)
     if @game.save
       flash[:notice] = "Player removed."
@@ -141,14 +125,6 @@ class GamesController < ApplicationController
   # DELETE /games/1.xml
   def destroy
     @game = Game.find(params[:id])
-    players = @game.players << @game.host
-    players.each do |p|
-      hand = p.card_in_hands.find_all {|card| card.deck.game == @game}
-      hand.each do |a|
-        p.cards.delete(a.card)
-      end
-      @user.save
-    end
     @game.destroy
       
     respond_to do |format|
