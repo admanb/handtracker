@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   
   def logged_in
-    session[:user_id] = nil
     if session[:user_id]
       @user = User.find(session[:user_id])
     end
