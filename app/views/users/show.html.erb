@@ -1,5 +1,5 @@
 <div class="guide">
-	<span class="action_title">Welcome <%= @user.login %></span>
+	<h2>Welcome <%= @user.login %></h2>
 	<%= link_to 'logout', :action => :logout, :id => @user %><br />
 </div>
 <br />
@@ -14,7 +14,7 @@
 		<br /><br />
 	</div>
 	<div class="guide">
-		<span class="action_title">Hosting</span>
+		<h2>Hosting</h2>
 		<span class="action"><%= link_to 'new game', new_game_url %></span>
 	</div>
 </div>
@@ -28,7 +28,7 @@
 		<% end %>
 	</div>
 	<div class="guide">
-		<span class="action_title">Playing</span>
+		<h2>Playing</h2>
 	</div>
 </div>
 <div class="object_box ">
@@ -41,7 +41,7 @@
 		<% end %><br /><br />
 	</div>
 	<div class="guide">
-		<span class="action_title">Your templates</span>
+		<h2>Your templates</h2>
 		<span class="action"><%= link_to 'new template', new_template_url %></span>
 	</div>
 </div>
@@ -52,7 +52,7 @@
 		<% end %>
 	</div>
 	<div class="guide">
-		<span class="action_title">Public templates</span>
+		<h2>Public templates</h2>
 	</div>
 </div>
 <div class="object_box"></div>

@@ -1,6 +1,6 @@
 <div class="guide">
 	<span class="action"><%= link_to 'back to my games', user_url(@user) %></span><br /><br />
-	<span class="action_title">Viewing template</span>
+	<h2>Viewing template</h2>
 	<%= @tpl.name %><br /><br />
 </div>
 <div class="object_box ">
@@ -12,7 +12,7 @@
 		<% end %>
 	</div>
 	<div class="guide">
-		<span class="action_title">Public?</span>
+		<h2>Public?</h2>
 		<% if @owner %>
 			<% if @tpl.public %>
 				<%= link_to 'make un-public', :action => 'toggle_public', :id => @tpl, :public => 0 %>
@@ -40,7 +40,7 @@
 		<% end %>
 	</div>
 	<div class="guide">
-		<span class="action_title">Cards</span>
+		<h2>Cards</h2>
 		<% if @owner %>
 			<span class="action"><%= link_to 'add cards', new_template_card_url(@tpl)%>
 		<% end %>

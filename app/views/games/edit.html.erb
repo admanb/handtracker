@@ -1,12 +1,26 @@
-<h1>Editing game</h1>
-
-<% form_for(@game) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @game %> |
-<%= link_to 'Back', games_path %>
+<div class="guide">
+	<h2>Add Deck</h2>
+	<%= link_to 'cancel', user_url(@user) %>
+</div>
+<br />
+<div class="object_box ">
+	<div class="view">
+		<% form_for(@game) do |f| %>
+			<%= f.error_messages %>
+			<%= f.text_field :title %>
+	</div>
+	<div class="guide">
+		<h2>Title</h2>
+	</div>
+</div>
+<div class="object_box ">
+	<div class="view">
+		<%= select_tag :template_id, options_from_collection_for_select(@templates, :id, :name)%><br />
+		<%= f.submit 'Update' %>
+		<% end %>
+	</div>
+	<div class="guide">
+		<h2>Deck</h2>
+	</div>
+</div>
+<div class="object_box"></div>

@@ -12,12 +12,26 @@ pre {
   font-size: 11px;
 }
 
-#title {
+h1 {
 	margin-top: 50px;
 	margin-left: 5px;
 	font-size: 36px;
 	font-weight: bold;
 	color: black;
+}
+
+h2 {
+	font-weight: bold;
+	font-variant: small-caps;
+	font-size: 20px;
+	margin-bottom: 3px;
+}
+
+h3 {
+	font-style: italic;
+	font-weight: normal;
+	font-size: 14px;
+	margin: 0px;
 }
 
 #footer {	
@@ -50,7 +64,7 @@ pre {
 }
 
 .position {
-	border :2px solid #006;
+	border: 2px solid #006;
 	padding: 2px;
 	background-color: #9ff;
 }
@@ -58,6 +72,10 @@ pre {
 .object_box {
 	width: 900px;
 	clear: both;
+}
+
+.guide_border {
+	border-top: 2px solid grey;
 }
 
 .guide {
@@ -71,14 +89,8 @@ pre {
 	padding-left: 10px;
 	border-left: 2px solid grey;
 	float: right;
-	padding-bottom: 20px;	
-}
-
-.action_title {
-	display: block;
-	font-weight: bold;
-	font-variant: small-caps;
-	font-size: 20px;
+	padding-bottom: 10px;	
+	padding-top: 10px;	
 }
 
 .action {

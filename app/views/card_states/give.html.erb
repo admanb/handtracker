@@ -1,7 +1,7 @@
 <div class="guide">
 	<%= link_to 'cancel', game_url(@game) %>
 	<p>
-	<span class="action_title">Give card</span>
+	<h2>Give card</h2>
 	</p>
 </div><br />
 <div class="object_box ">
@@ -13,8 +13,8 @@
 		<br /><br /><br /><br /><br /><br /><br /><br />
 	</div>
 	<div class="guide">
-		<span class="action_title">Recipient</span>
-		<% form_tag :action => :give_card, :id => @deck, :game_id => @game, :card_id => @card do %>
+		<h2>Recipient</h2>
+		<% form_tag :action => :give_card, :id => @card, :game_id => @game do %>
 			<%= select_tag 'recipient_id', options_from_collection_for_select(@players, :id, :login) %>
 			<%= submit_tag 'give card'%>
 		<% end %>

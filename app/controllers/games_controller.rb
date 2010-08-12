@@ -17,11 +17,9 @@ class GamesController < ApplicationController
   
   def show
     @game = Game.find(params[:id])
-    @deck = @game.deck
+    @decks = @game.decks
     @current_players = @game.all_players
     @available_players = User.find(:all) - @current_players
-    @discarded = @deck.get_discard
-    @draw_pile = @deck.get_draw
     if(@host)
       @acts = @game.all_acts
     else
@@ -29,10 +27,6 @@ class GamesController < ApplicationController
     end
     @hand = @user.get_hand(@game)
     @hand = @hand ? @hand : []
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @game }
-    end
   end
 
   def add_player
@@ -74,33 +68,24 @@ class GamesController < ApplicationController
   def new
     @game = Game.new
     @templates = Template.find_public_and_own(@user.id)
-    
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @game }
-    end
   end
 
   # GET /games/1/edit
   def edit
     @game = Game.find(params[:id])
+    @templates = Template.find_public_and_own(@user.id)
   end
 
   # POST /games
-  # POST /games.xml
   def create
     @game = Game.new(params[:game])
     @game.host = @user
-    @game.deck = Deck.new_from_template(params[:template_id])
-    respond_to do |format|
-      if @game.save
-        flash[:notice] = 'Game was successfully created.'
-        format.html { redirect_to(@game) }
-        format.xml  { render :xml => @game, :status => :created, :location => @game }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @game.errors, :status => :unprocessable_entity }
-      end
+    @game.decks << Deck.new_from_template(params[:template_id])
+    if @game.save
+      flash[:notice] = 'Game was successfully created.'
+      redirect_to(@game)
+    else
+      render :action => "new"
     end
   end
 
@@ -108,16 +93,13 @@ class GamesController < ApplicationController
   # PUT /games/1.xml
   def update
     @game = Game.find(params[:id])
-
-    respond_to do |format|
-      if @game.update_attributes(params[:game])
-        flash[:notice] = 'Game was successfully updated.'
-        format.html { redirect_to(@game) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @game.errors, :status => :unprocessable_entity }
-      end
+    @game.decks << Deck.new_from_template(params[:template_id])
+    @game.title = params[:game][:title]
+    if @game.save()
+      flash[:notice] = 'Game was successfully updated.'
+      redirect_to(@game)
+    else
+      render :action => "edit"
     end
   end
 
@@ -126,11 +108,7 @@ class GamesController < ApplicationController
   def destroy
     @game = Game.find(params[:id])
     @game.destroy
-      
-    respond_to do |format|
-      format.html { redirect_to(user_url(@user)) }
-      format.xml  { head :ok }
-    end
+    redirect_to(user_url(@user))
   end
   
   private
@@ -139,7 +117,9 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @game.players.exists?(@user) ? @player = true : @player = false
     @user == @game.host ? @host = true : @host = false
+    if !(@player || @host)
+      flash[:notice] = 'You are not a player in that game.'
+      @user ? redirect_to(@user) : redirect_to(login_url)
+    end
   end
-  
-    
 end

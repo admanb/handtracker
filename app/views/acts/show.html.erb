@@ -1,8 +1,8 @@
 <div class="guide">
 	<%= link_to 'back to the game', game_url(@game) %>
 	<p>
-	<span class="action_title">Viewing act</span>
-	<%= @act.id %>
+	<h2>Viewing act</h2>
+	<h3><%= @act.position %></h3>
 	</p>
 </div><br />
 <div class="object_box ">
@@ -14,9 +14,11 @@
 		<br /><br /><br /><br /><br /><br /><br /><br />
 	</div>
 	<div class="guide">
-		<span class="action_title">Game</span>
-		<%= @game.title %><br /><br />
-		<span class="action_title">Time</span>
+		<h2>Game</h2>
+		<h3><%= @game.title %></h3><br />
+		<h2>Deck</h2>
+		<%= @act.card_state.deck.name %><br />
+		<h2>Time</h2>
 		<%= @act.created_at %><br /><br />
 	</div>
 </div>
