@@ -7,18 +7,23 @@
 	<% end %>
 <p>
 	<h2>Players</h2>
-	<% @game.players.each do |p| %>
-		<%= p.login %> <% if p == @game.host %>
-											(host)
-									 <% elsif @host %>
-											<%= link_to 'remove', :action => :remove_player, :id => @game, :player_id => p.id %>
-									 <% end %><br />
-	<% end %>
-	<% if @host %>
-		<% form_tag :action => :add_player, :id => @game do %>
-			<%= select_tag 'new_player_id', options_from_collection_for_select(@available_players, :id, :login) %>
-			<%= submit_tag 'add player'%>
+		<% form_tag :action => :change_player, :id => @game do %>
+		<% if @host %>
+			<%= select_tag 'new_player_id', options_from_collection_for_select(@available_players, :id, :login) %><br />
+			add player <%= radio_button_tag 'old_player_id', 'add', true %><br />
 		<% end %>
+		<% @game.players.each do |p| %>
+			<%= p.login %> <% if p == @game.host %>
+												(host)
+										 <% elsif @host %>
+												<%= link_to 'remove', { :action => :remove_player, :id => @game, :old_player_id => p.id },
+																							  :confirm => 'Are you sure you want to remove ' + p.login + '?' %>
+										 <% end %>
+			<% if @host %><%= radio_button_tag 'old_player_id', p.id %><% end %><br />
+		<% end %>
+		<% if @host %>
+			<%= submit_tag 'add or replace selected'%><br />		
+		<% end %>		
 	<% end %>
 </p>
 </div>

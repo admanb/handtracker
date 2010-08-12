@@ -42,21 +42,28 @@ class GamesController < ApplicationController
     end
   end
 
-  def remove_player
-    @player = User.find(params[:player_id])
+  def change_player
     @game = Game.find(params[:id])
-    players_hand = @player.get_hand(@game)
-    players_hand.each do |a|
-      a.move_to_discard()
-    end   
-    @game.players.delete(@player)
-    if @game.save
-      flash[:notice] = "Player removed."
+    new_player = User.find(params[:new_player_id])
+    if params[:old_player_id] == 'add'
+      @game.players << new_player
+      @game.save
+      flash[:notice] = "Player added."
       redirect_to(@game)
     else
-      flash[:notice] = "Something went wrong. The player wasn't removed."
+      old_player = User.find(params[:old_player_id])    
+      @game.replace_player(old_player, new_player)
+      flash[:notice] = "Player replaced."
       redirect_to(@game)
     end
+  end
+  
+  def remove_player
+    @game = Game.find(params[:id])
+    old_player = User.find(params[:old_player_id])
+    @game.remove_player(old_player)
+    flash[:notice] = "Player removed."
+    redirect_to(@game)
   end
 
   def undo
