@@ -1,21 +1,29 @@
-<h1>Register</h1>
-
+<%= flash[:error] %>
 <% form_for(@user) do |f| %>
-  <%= f.error_messages %>
+<%= f.error_messages %>
+<div class="object_box ">
+	<div class="view">
+		<%= f.text_field :login %>
+	</div>
+	<div class="guide">
+		<h2>Login</h2>
+	</div>
+</div>
 
-  <p>
-    <b><%= f.label :login %></b><br />
-    <%= f.text_field :login %>
-  </p>
-  <p>
-		WARNING: Passwords are stored and sent in plain text. Do not use an important password for this registration.<br />
-    <b><%= f.label :password %></b><br />
-    <%= f.password_field :password %>
-  </p>
-	<p>
-	  <b>Confirm Password</b><br />
-	  <%= f.password_field :password_confirmation %>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+<div class="object_box ">
+	<div class="view">
+			WARNING: Passwords are stored and sent in plain text. Do not use an important password for this registration.<br />
+	    <%= f.password_field :password %>
+		<p>
+		  <b>Confirm: </b><br />
+		  <%= f.password_field :password_confirmation %>
+	  <p>
+	    <%= f.submit 'Register' %>
+	  </p>
+	</div>
+	<div class="guide">
+		<h2>Password</h2>
+	</div>
+</div>
+<div class="object_box"></div>
 <% end %>
