@@ -22,7 +22,7 @@ class Game < ActiveRecord::Base
   end
   
   def all_players
-    return players.to_a << host
+    return players
   end
   
   def remove_player(old_player)
