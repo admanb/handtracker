@@ -15,14 +15,16 @@ class Game < ActiveRecord::Base
   end
   
   def create_deck_permissions(deck)
-    self.all_players.each do |p|
+    host_permissions = Permission.new(:user => self.host, :deck => deck)
+    host_permissions.save()
+    self.players.each do |p|
       permissions = Permission.new(:user => p, :deck => deck)
       permissions.save()
     end
   end
   
   def all_players
-    return players
+    return players.to_a << host
   end
   
   def remove_player(old_player)
