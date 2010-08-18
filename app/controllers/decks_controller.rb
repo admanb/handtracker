@@ -4,13 +4,8 @@ class DecksController < ApplicationController
   
   # GET /decks
   # GET /decks.xml
-  def index
-    @decks = Deck.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @decks }
-    end
+  def index # this is actually an edit permissions page
+    @game = Game.find(params[:game_id])
   end
 
   # GET /decks/1/edit
@@ -24,7 +19,7 @@ class DecksController < ApplicationController
     @deck = Deck.find(params[:id])
     @deck.update_attributes(params[:deck])
     flash[:notice] = "Permissions updated."
-    redirect_to edit_game_deck_url(@game, @deck)
+    redirect_to game_decks_url(@game)
   end
 
   # PUT /decks/1

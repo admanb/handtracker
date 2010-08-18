@@ -3,6 +3,7 @@
 	<%= link_to 'return to game', game_url(@game) %>
 </div>
 <br />
+<% @game.decks.each do |deck| %>
 <div class="object_box ">
 	<div class="view">
 		<table id="permissions">
@@ -13,8 +14,8 @@
 				<th>shuffle</th>
 				<th>give</th>
 			</tr>
-			<% form_for [@game, @deck] do |deck_form| %>
-				<% @deck.permissions.each do |permission| %>
+			<% form_for [@game, deck] do |deck_form| %>
+				<% deck.permissions.each do |permission| %>
 					<% deck_form.fields_for :permissions, permission do |permission_form| %>
 							<tr>
 								<th><% if permission.user == @user %>you<% else %><%= permission.user.login%><% end %></th>
@@ -27,12 +28,13 @@
 				<% end %>
 		</table>
 			<%= deck_form.submit %>
-		<% end %>
+		<% end %>		
 	</div>
 	<div class="guide">
 		<h2>Deck</h2>
-		<h3><%= @deck.name %></h3>
+		<h3><%= deck.name %></h3>
 	</div>
 </div>
+<% end %>
 <div class="object_box"></div>
 

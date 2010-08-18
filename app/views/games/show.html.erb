@@ -4,6 +4,7 @@
 	<h3><%= @game.title %></h3>
 	<% if @host %>
 		<%= link_to 'add deck', edit_game_url(@game) %><br />
+		<%= link_to 'edit permissions', game_decks_url(@game) %>
 	<% end %>
 <p>
 	<h2>Players</h2>
@@ -66,7 +67,6 @@
 			<h3><%= deck.name %></h3>
 			<% if @host %>
 				<%= link_to 'remove deck', game_deck_url(@game, deck), :method => :delete, :confirm => 'Are you sure?'%><br />
-				<%= link_to 'edit permissions', edit_game_deck_url(@game, deck) %>
 			<% end %>
 		</div>
 	</div>
