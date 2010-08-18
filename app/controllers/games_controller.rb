@@ -100,10 +100,11 @@ class GamesController < ApplicationController
   # PUT /games/1.xml
   def update
     @game = Game.find(params[:id])
-    @game.decks << Deck.new_from_template(params[:template_id])
+    @deck = Deck.new_from_template(params[:template_id])
+    @game.decks << @deck
     if @game.save()
       flash[:notice] = 'Game was successfully updated.'
-      redirect_to(@game)
+      redirect_to edit_game_deck_url(@game, @deck)
     else
       render :action => "edit"
     end

@@ -15,7 +15,7 @@ class Game < ActiveRecord::Base
   end
   
   def create_deck_permissions(deck)
-    host_permissions = Permission.new(:user => self.host, :deck => deck)
+    host_permissions = Permission.new_for_host(self.host, deck)
     host_permissions.save()
     self.players.each do |p|
       permissions = Permission.new(:user => p, :deck => deck)
