@@ -69,7 +69,7 @@ class GamesController < ApplicationController
   def undo
     
   end
-
+  
   # GET /games/new
   # GET /games/new.xml
   def new
@@ -101,7 +101,6 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     @game.decks << Deck.new_from_template(params[:template_id])
-    @game.title = params[:game][:title]
     if @game.save()
       flash[:notice] = 'Game was successfully updated.'
       redirect_to(@game)

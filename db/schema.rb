@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100812195607) do
+ActiveRecord::Schema.define(:version => 20100817202907) do
 
   create_table "acts", :force => true do |t|
     t.integer  "game_id",       :null => false
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(:version => 20100812195607) do
     t.integer  "host_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.integer "user_id",                             :null => false
+    t.integer "deck_id",                             :null => false
+    t.boolean "can_draw",         :default => true
+    t.boolean "can_draw_to_hand", :default => true
+    t.boolean "can_shuffle",      :default => false
+    t.boolean "can_give",         :default => false
   end
 
   create_table "players_games", :id => false, :force => true do |t|

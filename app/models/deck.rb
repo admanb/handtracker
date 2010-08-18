@@ -2,7 +2,9 @@ class Deck < ActiveRecord::Base
   belongs_to :game
   
   has_many :card_states, :order => :position, :dependent => :destroy
-
+  has_many :permissions, :dependent => :destroy
+  accepts_nested_attributes_for :permissions
+    
   def next_draw_position
     max = get_draw.max {|a,b| a.position <=> b.position}
     if max
@@ -18,6 +20,12 @@ class Deck < ActiveRecord::Base
       return max.position + 1
     else
       return 0
+    end
+  end
+  
+  def shift_down
+    card_states.each do |s| 
+      s.update_attribute(:position => s.position+1)
     end
   end
   

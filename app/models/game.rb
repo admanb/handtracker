@@ -1,11 +1,25 @@
 class Game < ActiveRecord::Base
-  has_and_belongs_to_many :players, :class_name => 'User', :join_table => 'players_games'
+  has_and_belongs_to_many :players, :class_name => 'User', :join_table => 'players_games', :after_add => :create_player_permissions
   belongs_to :host, :class_name => 'User'
-  has_many :decks, :dependent => :destroy
+  has_many :decks, :dependent => :destroy, :after_add => :create_deck_permissions
   has_many :acts
-  
+    
   validates_presence_of :title
   validates_uniqueness_of :title
+  
+  def create_player_permissions(player)
+    self.decks.each do |d|
+      permissions = Permission.new(:user => player, :deck => d)
+      permissions.save()
+    end
+  end
+  
+  def create_deck_permissions(deck)
+    self.all_players.each do |p|
+      permissions = Permission.new(:user => p, :deck => deck)
+      permissions.save()
+    end
+  end
   
   def all_players
     return players.to_a << host

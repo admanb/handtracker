@@ -7,9 +7,14 @@ class CardState < ActiveRecord::Base
   
   validates_inclusion_of :status, :in => %w(draw discard hand)
   
-  def move_to_draw
+  def move_to_draw(position = :bottom) # will cause position gaps when moving from discard
     if(status != 'draw')
-      update_attributes(:status => 'draw', :user => nil, :position => deck.next_draw_position)
+      if(position == :bottom)
+        update_attributes(:status => 'draw', :user => nil, :position => deck.next_draw_position)
+      elsif(position == :top)
+        deck.shift_down()
+        update_attributes(:status => 'draw', :user => nil, :position => 0)
+      end
     end
   end
   

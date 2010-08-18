@@ -1,0 +1,38 @@
+<div class="guide">
+	<h2>Edit permissions</h2>
+	<%= link_to 'return to game', game_url(@game) %>
+</div>
+<br />
+<div class="object_box ">
+	<div class="view">
+		<table id="permissions">
+			<tr>
+				<th class="blank"></th>
+				<th>draw</th>
+				<th>draw to hand</th>
+				<th>shuffle</th>
+				<th>give</th>
+			</tr>
+			<% form_for [@game, @deck] do |deck_form| %>
+				<% @deck.permissions.each do |permission| %>
+					<% deck_form.fields_for :permissions, permission do |permission_form| %>
+							<tr>
+								<th><% if permission.user == @user %>you<% else %><%= permission.user.login%><% end %></th>
+								<td><%= permission_form.check_box :can_draw %></td>
+								<td><%= permission_form.check_box :can_draw_to_hand %></td>
+								<td><%= permission_form.check_box :can_shuffle %></td>
+								<td><%= permission_form.check_box :can_give %></td>
+							</tr>
+					<% end %>
+				<% end %>
+		</table>
+			<%= deck_form.submit %>
+		<% end %>
+	</div>
+	<div class="guide">
+		<h2>Deck</h2>
+		<h3><%= @deck.name %></h3>
+	</div>
+</div>
+<div class="object_box"></div>
+

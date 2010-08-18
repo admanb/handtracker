@@ -15,15 +15,25 @@ class DecksController < ApplicationController
 
   # GET /decks/1/edit
   def edit
+    @game = Game.find(params[:game_id])
     @deck = Deck.find(params[:id])
+  end
+  
+  def update
+    @game = Game.find(params[:game_id])
+    @deck = Deck.find(params[:id])
+    @deck.update_attributes(params[:deck])
+    flash[:notice] = "Permissions updated."
+    redirect_to edit_game_deck_url(@game, @deck)
   end
 
   # PUT /decks/1
   # PUT /decks/1.xml
-  def update
+  def shuffle
     @deck = Deck.find(params[:id])
     @game = Game.find(params[:game_id])
     @deck.shuffle
+    flash[:notice] = 'Shuffled ' + @deck.name
     redirect_to game_url(@game)
   end
 
