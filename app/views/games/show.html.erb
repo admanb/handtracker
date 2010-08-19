@@ -131,29 +131,26 @@
 
 <div class="object_box ">
 	<div class="view">
+		<% n = 0 %>
 		<div class="card">
 			<span class="text">There are <%= @acts.length %> acts</span>
-			<%= link_to_remote "-> view recent acts", :url => '#', :complete => visual_effect(:toggle_slide, 'recent-acts')%>
+			<%= link_to_remote "-> view recent acts", :url => '#', :complete => visual_effect(:toggle_slide, 'hidden-acts-'+n.to_s)%>
 		</div>
-		<div id="recent-acts" style="display:none">
-			<% @acts_first_five.each do |act| %>
-			<div class="card">
-				<%= link_to "#{act.position}:", game_act_url(@game, act) %> <%= render :partial => 'acts/act', :object => act %>
+		<% @acts.each_slice(5) do |act_slice| %>
+			<div id="hidden-acts-<%= n %>" style="display:none;">
+			<% n = n + 1 %>
+				<% act_slice.each do |act| %>
+					<div class="card">
+						<%= link_to "#{act.position}:", game_act_url(@game, act) %> <%= render :partial => 'acts/act', :object => act %>
+					</div>
+				<% end %>
+				<div id="view-acts-<%= n %>" class="card">
+					<%= link_to_remote "-> view more acts", :url => '#', :loaded => visual_effect(:toggle_slide, 'view-acts-'+n.to_s),
+																															 :complete => visual_effect(:toggle_slide, 'hidden-acts-'+n.to_s)%>
+				</div>
 			</div>
-			<% end %>
-			<div class="card">
-				<%= link_to_remote "-> view all acts", :url => '#', :complete => visual_effect(:toggle_slide, 'all-acts')%>
-			</div>
-		</div>
-		<% if @acts_rest %>
-		<div id="all-acts" style="display:none">
-			<% @acts_rest.each do |act| %>
-			<div class="card">
-				<%= link_to "#{act.position}:", game_act_url(@game, act) %> <%= render :partial => 'acts/act', :object => act %>
-			</div>
-			<% end %>
-		</div>
 		<% end %>
+
 	</div>
 	<div class="guide">
 		<div class="guide_border"></div>
