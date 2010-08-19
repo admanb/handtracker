@@ -72,12 +72,17 @@ h3 {
 	background-color: #9ff;
 }
 
+.deck_box {
+	border: 1px solid black;
+}
+
 .object_box {
 	width: 100%;
 	clear: both;
 }
 
-.guide_border {
+
+.object_top_border {
 	border-top: 2px solid grey;
 }
 

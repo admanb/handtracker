@@ -2,7 +2,7 @@ class Game < ActiveRecord::Base
   has_and_belongs_to_many :players, :class_name => 'User', :join_table => 'players_games', :after_add => :create_player_permissions
   belongs_to :host, :class_name => 'User'
   has_many :decks, :dependent => :destroy, :after_add => :create_deck_permissions
-  has_many :acts
+  has_many :acts, :order => 'position DESC'
     
   validates_presence_of :title
   validates_uniqueness_of :title

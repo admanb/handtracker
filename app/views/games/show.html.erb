@@ -56,13 +56,12 @@
 </div>
 
 <% @decks.each do |deck| %>
-
-	<div class="object_box ">
+	<div class="object_box object_top_border">
 		<div class="view">
-			<br /><br /><br /><br />
+			<br /><br /><br /><br /><br /><br />
 		</div>
 		<div class="guide">
-			<div class="guide_border"></div>
+			<!--><div class="guide_border"></div>-->
 			<h2>Deck</h2>
 			<h3><%= deck.name %></h3>
 			<% if @host %>
@@ -127,15 +126,32 @@
 			<h2>Discards</h2>
 		</div>
 	</div>
-
 <% end %>
 
 
 <div class="object_box ">
 	<div class="view">
-		<% @acts.each do |act| %>
 		<div class="card">
-			<%= link_to "#{act.position}:", game_act_url(@game, act) %> <%= render :partial => 'acts/act', :object => act %>
+			<span class="text">There are <%= @acts.length %> acts</span>
+			<%= link_to_remote "-> view recent acts", :url => '#', :complete => visual_effect(:toggle_slide, 'recent-acts')%>
+		</div>
+		<div id="recent-acts" style="display:none">
+			<% @acts_first_five.each do |act| %>
+			<div class="card">
+				<%= link_to "#{act.position}:", game_act_url(@game, act) %> <%= render :partial => 'acts/act', :object => act %>
+			</div>
+			<% end %>
+			<div class="card">
+				<%= link_to_remote "-> view all acts", :url => '#', :complete => visual_effect(:toggle_slide, 'all-acts')%>
+			</div>
+		</div>
+		<% if @acts_rest %>
+		<div id="all-acts" style="display:none">
+			<% @acts_rest.each do |act| %>
+			<div class="card">
+				<%= link_to "#{act.position}:", game_act_url(@game, act) %> <%= render :partial => 'acts/act', :object => act %>
+			</div>
+			<% end %>
 		</div>
 		<% end %>
 	</div>

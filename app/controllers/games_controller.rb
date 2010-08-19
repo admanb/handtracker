@@ -25,6 +25,8 @@ class GamesController < ApplicationController
     else
       @acts = @game.visible_acts(@user)
     end
+    @acts_first_five = @acts[0..4]
+    @acts_rest = @acts[5..(@acts.length)]
     @hand = @user.get_hand(@game)
     @hand = @hand ? @hand : []
   end
