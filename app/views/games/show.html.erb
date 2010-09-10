@@ -61,7 +61,6 @@
 			<br /><br /><br /><br /><br /><br />
 		</div>
 		<div class="guide">
-			<!--><div class="guide_border"></div>-->
 			<h2>Deck</h2>
 			<h3><%= deck.name %></h3>
 				<strong><%= link_to_remote "show/hide deck", :url => '#', :complete => visual_effect(:toggle_appear, "deck-"+deck.id.to_s)%></strong><br />

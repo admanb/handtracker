@@ -105,8 +105,8 @@ class GamesController < ApplicationController
     @deck = Deck.new_from_template(params[:template_id])
     @game.decks << @deck
     if @game.save()
-      flash[:notice] = 'Game was successfully updated.'
-      redirect_to edit_game_deck_url(@game, @deck)
+      flash[:notice] = 'Added a deck.'
+      redirect_to game(@game)
     else
       render :action => "edit"
     end
