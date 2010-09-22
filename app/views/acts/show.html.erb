@@ -9,7 +9,11 @@
 	<div class="view">
 		<b><%= @act_owner.login %></b> <%= act_to_english(@act.act_type) %>: <br />
 		<div class="card">
-			<%= render :partial => 'cards/card', :object => @act.card_state.card %>
+			<% if @act.card_state %>
+				<%= render :partial => 'cards/card', :object => @act.card_state.card %>
+			<% else %>
+				card no longer exists
+			<% end %>
 		</div>
 		<br /><br /><br /><br /><br /><br /><br /><br />
 	</div>
@@ -17,7 +21,12 @@
 		<h2>Game</h2>
 		<h3><%= @game.title %></h3><br />
 		<h2>Deck</h2>
-		<%= @act.card_state.deck.name %><br />
+		<% if @act.card_state %>
+			<%= @act.card_state.deck.name %>
+		<% else %>
+			defunct
+		<% end %>
+			<br />
 		<h2>Time</h2>
 		<%= @act.created_at %><br /><br />
 	</div>
