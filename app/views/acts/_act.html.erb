@@ -1,1 +1,1 @@
-<strong><%= act.user.login %></strong> <%= act_to_english(act.act_type) %> from <em><%= act.card_state.deck.name %></em> on <em><%= act.created_at.to_formatted_s(:short) %> UTC</em>
+<strong><%= act.user.login %></strong> <%= act_to_english(act.act_type) %> from <em><% if act.card_state %><%= act.card_state.deck.name %><% else %>a defunct deck<% end %></em> on <em><%= act.created_at.to_formatted_s(:short) %> UTC</em>
