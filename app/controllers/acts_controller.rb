@@ -16,7 +16,7 @@ class ActsController < ApplicationController
     game = Game.find(params[:game_id])
     if (act_owner != @user) && (@user != game.host) && act.restricted?
       flash[:notice] = "That act isn\'t visible to you."
-      @user ? redirect_to(game_url(game)) : redirect_to(login_url)
+      @user ? redirect_to(game) : redirect_to(login_url)
     end
   end
   

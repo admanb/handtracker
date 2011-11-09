@@ -15,9 +15,9 @@
 		<h2>Public?</h2>
 		<% if @owner %>
 			<% if @tpl.public %>
-				<%= link_to 'make un-public', :action => 'toggle_public', :id => @tpl, :public => 0 %>
+				<%= link_to 'make un-public', toggle_public_template_url(@tpl), :public => 0 %>
 			<% else %>
-				<%= link_to 'make public', :action => 'toggle_public', :id => @tpl, :public => 1 %>
+				<%= link_to 'make public', toggle_public_template_url(@tpl), :public => 1 %>
 			<% end %>
 		<% end %>
 	</div>

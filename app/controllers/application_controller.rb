@@ -14,5 +14,6 @@ class ApplicationController < ActionController::Base
     if session[:user_id]
       @user = User.find(session[:user_id])
     end
+    logger.debug "logged_in called!"
   end
 end

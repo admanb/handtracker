@@ -59,12 +59,14 @@ class DecksController < ApplicationController
     @game = Game.find(params[:game_id])
     @deck.destroy
     flash[:notice] = 'Deck destroyed'
-    redirect_to game_url(@game)
+    redirect_to(@game)
   end
   
   private
 
   def user_status
+    logger.debug "user_status called!"
+    logger.debug "Session: #{session.inspect}"
     @game = Game.find(params[:game_id])
     if !(@game.players.exists?(@user) || @game.host == @user)
       flash[:notice] = 'You are not a player in that game.'

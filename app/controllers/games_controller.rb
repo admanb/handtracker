@@ -31,19 +31,6 @@ class GamesController < ApplicationController
     @hand = @hand ? @hand : []
   end
 
-  def add_player
-    @player = User.find(params[:new_player_id])
-    @game = Game.find(params[:id])
-    @game.players << @player
-    if @game.save
-      flash[:notice] = "Player added."
-      redirect_to(@game)
-    else
-      flash[:notice] = "Something went wrong. The player wasn't added."
-      redirect_to(@game)
-    end
-  end
-
   def change_player
     @game = Game.find(params[:id])
     new_player = User.find(params[:new_player_id])
@@ -106,7 +93,7 @@ class GamesController < ApplicationController
     @game.decks << @deck
     if @game.save()
       flash[:notice] = 'Added a deck.'
-      redirect_to game(@game)
+      redirect_to(@game)
     else
       render :action => "edit"
     end
@@ -123,6 +110,8 @@ class GamesController < ApplicationController
   private
   
   def user_status
+    logger.debug "user_status called!"
+    logger.debug "Session: #{session.inspect}"
     @game = Game.find(params[:id])
     @game.players.exists?(@user) ? @player = true : @player = false
     @user == @game.host ? @host = true : @host = false
