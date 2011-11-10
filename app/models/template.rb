@@ -2,6 +2,9 @@ class Template < ActiveRecord::Base
   has_many :cards
   belongs_to :user
   
+  validates_presence_of :name
+  validates_uniqueness_of :name
+  
   def self.find_public_and_own(user_id)
     find(:all, :conditions => [ "public = 't' OR user_id = ?", user_id])
   end

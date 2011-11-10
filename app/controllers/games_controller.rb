@@ -65,24 +65,26 @@ class GamesController < ApplicationController
     @game = Game.new
     @templates = Template.find_public_and_own(@user.id)
   end
+  
+  # POST /games
+  def create
+    @game = Game.new(params[:game])
+    @game.host = @user
+    if @game.save()
+      @game.decks << Deck.new_from_template(params[:template_id])
+      @game.save()
+      flash[:notice] = 'Game was successfully created.'
+      redirect_to(@game)
+    else
+      @templates = Template.find_public_and_own(@user.id)
+      render :action => "new"
+    end
+  end
 
   # GET /games/1/edit
   def edit
     @game = Game.find(params[:id])
     @templates = Template.find_public_and_own(@user.id)
-  end
-
-  # POST /games
-  def create
-    @game = Game.new(params[:game])
-    @game.host = @user
-    @game.decks << Deck.new_from_template(params[:template_id])
-    if @game.save
-      flash[:notice] = 'Game was successfully created.'
-      redirect_to(@game)
-    else
-      render :action => "new"
-    end
   end
 
   # PUT /games/1
@@ -110,8 +112,6 @@ class GamesController < ApplicationController
   private
   
   def user_status
-    logger.debug "user_status called!"
-    logger.debug "Session: #{session.inspect}"
     @game = Game.find(params[:id])
     @game.players.exists?(@user) ? @player = true : @player = false
     @user == @game.host ? @host = true : @host = false

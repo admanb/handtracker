@@ -50,7 +50,7 @@ class CardsController < ApplicationController
       flash[:notice] = 'Card updated.'
       redirect_to template_url(@tpl)
     else
-      render :action => 'new'
+      render :action => 'edit'
     end
   end
   

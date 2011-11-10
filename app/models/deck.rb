@@ -74,6 +74,6 @@ class Deck < ActiveRecord::Base
       deck.card_states << card_state
       pos = pos+1
     end
-    return deck
+    return deck.shuffle()
   end
 end

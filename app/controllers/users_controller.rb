@@ -78,6 +78,7 @@ class UsersController < ApplicationController
   end
   
   def login
+    @user = User.new()
   end
   
   def authenticate
@@ -87,6 +88,7 @@ class UsersController < ApplicationController
       redirect_to(@user)
     else
       flash[:error] = 'Invalid username or password.'
+      @user = User.new()
       render :action => 'login'
     end
   end

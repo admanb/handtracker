@@ -33,7 +33,7 @@
 					<% if @owner %>
 						- <%= link_to 'delete', template_card_url(@tpl, card), :confirm => 'Are you sure?', :method => :delete %> | 
 						<%= link_to 'edit', edit_template_card_url(@tpl, card) %> | 
-						<%= link_to 'copy', :controller => 'cards', :action => 'copy', :template_id => @tpl, :id => card %>
+						<%= link_to 'copy', copy_template_card_url(@tpl, card) %>
 					<% end %>
 				</div>
 			<% end %>

@@ -1,7 +1,17 @@
 <div class="object_box ">
 	<div class="view">
 		<% form_for(@tpl) do |f| %>
-			<%= f.error_messages %>
+			<% if @tpl.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@tpl.errors.count, "error") %> prohibited this template from being saved:</h2>
+
+          <ul>
+            <% @tpl.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 			<%= f.text_field :name %>
 	</div>
 	<div class="guide">

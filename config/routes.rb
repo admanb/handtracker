@@ -12,7 +12,11 @@ Handtracker::Application.routes.draw do
     member do
       get :toggle_public
     end
-    resources :cards
+    resources :cards do
+      member do
+        get :copy
+      end
+    end
   end
   resources :games do
     member do 

@@ -6,7 +6,17 @@
 <div class="object_box ">
 	<div class="view">
 		<% form_for(@game) do |f| %>
-			<%= f.error_messages %>
+			<% if @game.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+          <ul>
+            <% @game.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 			<%= f.text_field :title %>
 	</div>
 	<div class="guide">
@@ -15,8 +25,8 @@
 </div>
 <div class="object_box ">
 	<div class="view">
-		<%= select_tag :template_id, options_from_collection_for_select(@templates, :id, :name)%><br />
-		<%= f.submit 'Create' %>
+		  <%= select_tag :template_id, options_from_collection_for_select(@templates, :id, :name)%><br />
+		  <%= f.submit 'Create' %>
 		<% end %>
 	</div>
 	<div class="guide">
