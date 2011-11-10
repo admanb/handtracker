@@ -5,7 +5,7 @@
 <br />
 <div class="object_box ">
 	<div class="view">
-		<% form_for(@game) do |f| %>
+		<%= form_for(@game) do |f| %>
 		  <%= select_tag :template_id, options_from_collection_for_select(@templates, :id, :name)%><br />
 		  <%= f.submit 'Add' %>
 		<% end %>

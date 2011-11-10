@@ -1,5 +1,5 @@
 <%= flash[:error] %>
-<% form_for @user, :url => authenticate_users_url do |f| %>
+<%= form_for @user, :url => authenticate_users_url do |f| %>
 <div class="object_box ">
 	<div class="view">
 		<%= f.text_field :login %>

@@ -5,7 +5,7 @@
 <br />
 <div class="object_box ">
 	<div class="view">
-		<% form_for(@game) do |f| %>
+		<%= form_for(@game) do |f| %>
 			<% if @game.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>

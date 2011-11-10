@@ -14,7 +14,7 @@
 				<th>shuffle</th>
 				<th>give</th>
 			</tr>
-			<% form_for [@game, deck] do |deck_form| %>
+			<%= form_for [@game, deck] do |deck_form| %>
 				<% deck.permissions.each do |permission| %>
 					<% deck_form.fields_for :permissions, permission do |permission_form| %>
 							<tr>

@@ -5,7 +5,7 @@
 <br />
 <div class="object_box ">
 	<div class="view">
-		<% form_for([@tpl, @card]) do |f| %>
+		<%= form_for([@tpl, @card]) do |f| %>
 			<% if @card.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
