@@ -106,7 +106,7 @@ class GamesController < ApplicationController
     @game.decks << @deck
     if @game.save()
       flash[:notice] = 'Added a deck.'
-      redirect_to game(@game)
+      redirect_to(@game)
     else
       render :action => "edit"
     end
