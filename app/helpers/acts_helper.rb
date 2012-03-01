@@ -2,9 +2,9 @@ module ActsHelper
 
   def act_to_english(act_type)
     if act_type == 'draw_to_hand'
-		  return 'drew a card into his hand'
+		  return 'drew a card into their hand'
 		elsif act_type == 'play_from_hand'
-		  return 'played a card from his hand'
+		  return 'played a card from their hand'
 		elsif act_type == 'play_from_deck'
 		  return 'played a card from the deck'
 		elsif act_type == 'give_to_player'
