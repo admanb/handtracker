@@ -32,14 +32,12 @@ Handtracker::Application.routes.draw do
   
   resources :card_states do # this is weird because we don't use any of them
     member do
-      get :play, :give, :give_card
+      get :play, :give
+      post :give_card
     end
   end
 
   match '/login', :to => 'users#login', :as => 'login'
   root :to => 'users#login'
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
 end
