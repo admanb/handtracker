@@ -1,0 +1,27 @@
+<div class="guide">
+  <%= link_to 'cancel', game_url(@game) %>
+  <p>
+  <h2>Move card</h2>
+  </p>
+</div><br />
+<div class="object_box ">
+  <div class="view">
+    Pick a destination for this card:
+    <div class="card">
+      <%= render :partial => 'cards/card', :object => @card.card %>
+    </div>
+    <br /><br /><br /><br /><br /><br /><br /><br />
+  </div>
+  <div class="guide">
+    <h2>Destination</h2>
+    <% form_tag :action => :move_card, :id => @card, :game_id => @game do %>
+      top of deck <%= radio_button_tag 'destination', 'deck_top' %><br />
+      bottom of deck <%= radio_button_tag 'destination', 'deck_bottom' %><br />
+      discard <%= radio_button_tag 'destination', 'discard' %><br />
+      different deck <%= radio_button_tag 'destination', 'different_deck' %><br />
+      <%= select_tag 'deck_id', options_from_collection_for_select(@decks, 'id', 'name') %>
+      <%= submit_tag 'move card'%>
+    <% end %>
+  </div>
+</div>
+<div class="object_box ">

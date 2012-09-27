@@ -47,7 +47,7 @@ class Deck < ActiveRecord::Base
   
   def shuffle
     cards = get_draw + get_discard
-    if cards != nil # it's possible that every card in the deck will be in some player's hand
+    if(cards != nil && cards != []) # it's possible that every card in the deck will be in some player's hand
       cards.each do |card|
         if(card.status == 'discard')
           card.move_to_draw()

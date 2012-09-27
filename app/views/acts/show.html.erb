@@ -7,7 +7,7 @@
 </div><br />
 <div class="object_box ">
 	<div class="view">
-		<b><%= @act_owner.login %></b> <%= act_to_english(@act.act_type) %>: <br />
+		<b><%= @act_owner.login %></b> <%= @act.to_str %>: <br />
 		<div class="card">
 			<% if @act.card_state %>
 				<%= render :partial => 'cards/card', :object => @act.card_state.card %>

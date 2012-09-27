@@ -30,10 +30,10 @@ Handtracker::Application.routes.draw do
     resources :acts
   end
   
-  resources :card_states do # this is weird because we don't use any of them
+  resources :card_states do
     member do
-      get :play, :give
-      post :give_card
+      get :play, :give, :move
+      post :give_card, :move_card
     end
   end
 

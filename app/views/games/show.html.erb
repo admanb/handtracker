@@ -88,6 +88,7 @@
 						<% deck.get_draw.each do |d| %>
 						<div class="card">
 							<%= d.position+1 %>: <%= render :partial => 'cards/card', :object => d.card %>
+							<%= link_to 'move', move_card_state_url(d, :game_id => @game) %>
 						</div>
 						<% end %>
 					</div>
@@ -125,6 +126,7 @@
 					<% deck.get_discard.each do |d| %>
 					<div class="card">
 						<%= render :partial => 'cards/card', :object => d.card %>
+						<%= link_to 'move', move_card_state_url(d, :game_id => @game) %>
 					</div>
 					<% end %>
 				</div>

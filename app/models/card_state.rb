@@ -28,4 +28,9 @@ class CardState < ActiveRecord::Base
     update_attributes(:status => 'hand', :user => user, :position => nil)
   end
   
+  def move_to_deck(deck)
+    update_attributes(:status => 'discard', :user => nil, :deck => deck, 
+                      :position => deck.next_discard_position)
+  end
+
 end
