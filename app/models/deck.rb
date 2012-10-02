@@ -25,7 +25,7 @@ class Deck < ActiveRecord::Base
   
   def shift_down
     card_states.each do |s| 
-      s.update_attribute(:position => s.position+1)
+      s.update_attribute(:position, s.position+1)
     end
   end
   
